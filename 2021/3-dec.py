@@ -7,8 +7,6 @@ def column_bit(array, col=0, popularity='most'):
     least_likely = 1 - most_likely
 
     values, counts = np.unique(array[:, col], return_counts=True)
-    print(values)
-    print(counts)
     ind = np.argmax(counts)
 
     if popularity == 'most':
@@ -21,7 +19,7 @@ def epsilon_rate(array, mode = 'epsilon'):
     and turns this into a decimal epsilon rate. Calculates gamma_rate too'''
     print(np.shape(array)[1])
     most_freq_bits = [str(column_bit(array, col=i)) for i in range(0, np.shape(array)[1])]
-    binary_eps = int("".join(most_freq_bits))
+    binary_eps = int("".join(most_freq_bits), 10)
     print(binary_eps)
 
 
