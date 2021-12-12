@@ -20,10 +20,8 @@ def stringlist_to_dataframe(stringlist):
     return df.apply(pd.to_numeric, errors = 'ignore')
 
 
-# def stringlist_to_array(stringlist):
-#     '''takes a list of strings. for each string, produces a sublist of strings
-#     when this the string is split on spaces, and in turn converts this into a
-#     numpy array - a table, in some sense. Numerical strings are converted
-#     to floats'''
-#
-#     return np.array([i.split() for i in stringlist])
+def character_array(stringlist):
+    '''takes a list of strings. for each string, produces a sublist of characters,
+    and in turn converts this into a numpy array. they're still strings'''
+
+    return np.array([list(j[0]) for j in ([i.split() for i in stringlist])])
