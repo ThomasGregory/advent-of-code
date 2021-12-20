@@ -25,3 +25,4 @@ def character_array(stringlist):
     and in turn converts this into a numpy array. they're still strings'''
 
     return np.array([list(j[0]) for j in ([i.split() for i in stringlist])])
+ 
