@@ -30,20 +30,15 @@ def read_input(myfile):
 def create_grid(size, hitlist):
     '''generates a matrix of 1s (hits) and 0s representing the locations of the dots'''
 
-    mygrid = np.zeros([size[1]+1, size[0]+1])
+    grid = np.zeros([size[1]+1, size[0]+1])
     for coord in range(0, len(hitlist[0])): #!!for loop!!
-        mygrid[hitlist[1][coord], hitlist[0][coord]] = 1
+        grid[hitlist[1][coord], hitlist[0][coord]] = 1
 
-
-    #raise NotImplementedError
-
-    return mygrid
+    return grid
 
 
 def do_fold(grid, fold):
     '''takes a grid and applies a fold'''
-
-    raise NotImplementedError
 
     return grid
 
@@ -53,6 +48,7 @@ def solve_problem():
 
     size, hitlist, folds = read_input('inputs/13-tutorial.txt')
     mygrid = create_grid(size, hitlist)
+    mygrid = do_fold(mygrid, folds[0])
     print(mygrid)
 
     raise NotImplementedError
