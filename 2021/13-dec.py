@@ -1,6 +1,7 @@
 from utils import *
 import numpy as np
 import pandas as pd
+import time
 
 def read_input(myfile):
     '''reads the input file, and outputs:
@@ -20,9 +21,9 @@ def read_input(myfile):
 
     size = [max(xlist), max(ylist)]
 
-    print(size)
-    print(hitlist)
-    print(folds)
+    # print(size)
+    # print(hitlist)
+    # print(folds)
 
     return size, hitlist, folds
 
@@ -37,8 +38,71 @@ def create_grid(size, hitlist):
     return grid
 
 
-def do_fold(grid, fold):
+def do_fold(grid, fold, size):
     '''takes a grid and applies a fold'''
+
+    f = fold.split(' ')[2].split('=')
+    axis = f[0]
+    line = int(f[1])
+
+    if axis == 'y':
+        altgrid = np.fliplr(grid)
+    if axis == 'x':
+        altgrid = np.flipud(grid)
+
+    print(line)
+    print(size)
+    print(grid)
+    print(axis)
+    pos = 0
+
+
+    # if axis == 'y':
+    #     for j in range(line, size[1]+1):
+    #         print(j)
+    #         grid[(line - j):,:] = np.ceil((grid[j:,:] + grid[(size[1] - j):,:]) / 2)
+    #         print(grid)
+
+    if axis == 'x':
+        print('\n boop \n')
+        for i in range(line, size[0]+1):
+            print(f'pos is {pos}')
+            grid[:,(line - pos)] = np.ceil((grid[:, line + pos] + grid[:,(line - pos)])/2)
+            #print(grid)
+            pos += 1
+        grid = grid[:,0:line]
+        #print(grid)
+
+    if axis == 'y':
+        print('\n boop \n')
+        for i in range(line, size[1]+1):
+            print(f'pos is {pos}')
+            grid[(line - pos),:] = np.ceil((grid[line + pos, :] + grid[line - pos, :])/2)
+            #print(grid)
+            pos += 1
+        grid = grid[0:line, :]
+        #print(grid)
+
+
+    if axis == 'x':
+        print('\n boop \n')
+        for i in range(line, size[0]+1):
+            print(f'pos is {pos}')
+            grid[:,(line - pos)] = np.ceil((grid[:, line + pos] + grid[:,(line - pos)])/2)
+            #print(grid)
+            pos += 1
+        grid = grid[:,0:line]
+        #print(grid)
+
+    if axis == 'y':
+        print('\n boop \n')
+        for i in range(line, size[1]+1):
+            print(f'pos is {pos}')
+            grid[(line - pos),:] = np.ceil((grid[line + pos, :] + grid[line - pos, :])/2)
+            #print(grid)
+            pos += 1
+        grid = grid[0:line, :]
+        #print(grid)
 
     return grid
 
@@ -46,17 +110,28 @@ def do_fold(grid, fold):
 def solve_problem():
     '''carry out the problem'''
 
-    size, hitlist, folds = read_input('inputs/13-tutorial.txt')
+    size, hitlist, folds = read_input('inputs/13-input.txt')
     mygrid = create_grid(size, hitlist)
-    mygrid = do_fold(mygrid, folds[0])
-    print(mygrid)
 
-    raise NotImplementedError
+    count = 0
 
-    return solution
+    for i in folds:
+        count += 1
+        print(f'\n \n now working on fold number {count} \n \n')
+        mygrid = do_fold(mygrid, i, size)
+
+
+    # mygrid = do_fold(mygrid, folds[0], size)
+    # print('\n \n warning! one fold only!\n \n')
+
+
+    return mygrid, sum(sum(mygrid))
 
 if __name__ == "__main__":
+    startTime = time.time()
 #    print('Solution to Problem 1 is: ' + read_input('inputs/13-tutorial.txt'))
 #    print('Solution to Problem 2 is: ' + str(solve_problem('inputs/5-tutorial.txt', part = 2)))
     print('testing...')
-    solve_problem()
+    print(solve_problem()[0])
+    executionTime = (time.time() - startTime)
+    print('Execution time in seconds: ' + str(executionTime))
