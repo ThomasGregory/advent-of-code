@@ -63,44 +63,42 @@ def do_fold(grid, fold, size):
     #         grid[(line - j):,:] = np.ceil((grid[j:,:] + grid[(size[1] - j):,:]) / 2)
     #         print(grid)
 
+    # if axis == 'x':
+    #     print('\n boop \n')
+    #     for i in range(line, size[0]+1):
+    #         print(f'pos is {pos}')
+    #         grid[:,(line - pos)] = np.ceil((grid[:, line + pos] + grid[:,(line - pos)])/2)
+    #         #print(grid)
+    #         pos += 1
+    #     grid = grid[:,0:line]
+    #     #print(grid)
+    #
+    # if axis == 'y':
+    #     print('\n boop \n')
+    #     for i in range(line, size[1]+1):
+    #         print(f'pos is {pos}')
+    #         grid[(line - pos),:] = np.ceil((grid[line + pos, :] + grid[line - pos, :])/2)
+    #         #print(grid)
+    #         pos += 1
+    #     grid = grid[0:line, :]
+    #     #print(grid)
+
+
     if axis == 'x':
         print('\n boop \n')
-        for i in range(line, size[0]+1):
+        for pos in range(0, size[0]+1-line):
             print(f'pos is {pos}')
             grid[:,(line - pos)] = np.ceil((grid[:, line + pos] + grid[:,(line - pos)])/2)
             #print(grid)
-            pos += 1
         grid = grid[:,0:line]
         #print(grid)
 
     if axis == 'y':
         print('\n boop \n')
-        for i in range(line, size[1]+1):
+        for i in range(0, size[1] + 1 - line):
             print(f'pos is {pos}')
             grid[(line - pos),:] = np.ceil((grid[line + pos, :] + grid[line - pos, :])/2)
             #print(grid)
-            pos += 1
-        grid = grid[0:line, :]
-        #print(grid)
-
-
-    if axis == 'x':
-        print('\n boop \n')
-        for i in range(line, size[0]+1):
-            print(f'pos is {pos}')
-            grid[:,(line - pos)] = np.ceil((grid[:, line + pos] + grid[:,(line - pos)])/2)
-            #print(grid)
-            pos += 1
-        grid = grid[:,0:line]
-        #print(grid)
-
-    if axis == 'y':
-        print('\n boop \n')
-        for i in range(line, size[1]+1):
-            print(f'pos is {pos}')
-            grid[(line - pos),:] = np.ceil((grid[line + pos, :] + grid[line - pos, :])/2)
-            #print(grid)
-            pos += 1
         grid = grid[0:line, :]
         #print(grid)
 
